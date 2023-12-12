@@ -1,4 +1,4 @@
-package com.android.cameraocr.ui;
+package com.android.cameraocr.ui.fragment;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -20,6 +20,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import com.android.cameraocr.R;
 import com.android.cameraocr.databinding.FragmentCameraBinding;
 import com.android.cameraocr.databinding.FragmentSettingBinding;
+import com.android.cameraocr.viewmodel.UserViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.IOException;
@@ -46,11 +48,14 @@ import java.util.concurrent.Executors;
 public class CameraFragment extends Fragment {
     private static final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
     private static final int REQUEST_CODE_CAMERA_PERMISSION = 1001;
+    private FragmentCameraBinding cameraBinding;
+    private UserViewModel userViewModel;
 
     private ImageView previewImageView;
     private ExecutorService cameraExecutor;
     private PreviewView previewView;
     private ImageCapture imageCapture;
+    private Button captureButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,17 +65,22 @@ public class CameraFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_camera, container, false);
+        cameraBinding = FragmentCameraBinding.inflate(inflater, container, false);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        cameraBinding.setViewModel(userViewModel);
+        cameraBinding.setLifecycleOwner(getViewLifecycleOwner());
+        return cameraBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        previewView = view.findViewById(R.id.previewView);
-        Button captureButton = view.findViewById(R.id.captureButton);
-        previewImageView = view.findViewById(R.id.previewImageView);
+        initButton();
+        initCamera();
+    }
 
+    private void initCamera() {
         captureButton.setOnClickListener(v -> captureImage());
 
         if (allPermissionsGranted()) {
@@ -78,6 +88,12 @@ public class CameraFragment extends Fragment {
         } else {
             requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_CAMERA_PERMISSION);
         }
+    }
+
+    private void initButton() {
+        previewView = cameraBinding.previewView;
+        captureButton = cameraBinding.captureButton;
+        previewImageView = cameraBinding.previewImageView;
     }
 
     private void startCamera() {

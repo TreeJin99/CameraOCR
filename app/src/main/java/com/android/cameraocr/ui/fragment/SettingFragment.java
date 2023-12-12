@@ -1,4 +1,4 @@
-package com.android.cameraocr.ui;
+package com.android.cameraocr.ui.fragment;
 
 import android.os.Bundle;
 

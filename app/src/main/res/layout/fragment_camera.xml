@@ -4,50 +4,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.android.cameraocr.viewmodel.UserViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.android.cameraocr.ui.fragment.CameraFragment" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.CameraFragment">
+        tools:context=".ui.fragments.CameraFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/previewImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.fragments.CameraFragment">
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
 
-            <androidx.camera.view.PreviewView
-                android:id="@+id/previewView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/previewImageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/captureButton"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_marginBottom="42dp"
-                android:background="@drawable/button_rounded"
-                android:gravity="center"
-                android:stateListAnimator="@null"
-                android:text="촬영"
-                android:textColor="@color/green"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/captureButton"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/button_rounded"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="촬영"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </FrameLayout>
 
 </layout>

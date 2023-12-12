@@ -24,7 +24,6 @@ public class AllergyAnalyzing {
         List<String> userAllergies = userViewModel.getAllergies();
 
         for (String allergy : userAllergies) {
-            // allergy가 null이 아니고, fullOcrText에 포함되어 있다면 결과에 추가
             if (allergy != null && fullOcrText.contains(allergy)) {
                 result.add(allergy);
             }
