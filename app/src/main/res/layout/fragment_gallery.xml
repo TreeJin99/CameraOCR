@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.android.cameraocr.viewmodel.UserViewModel"/>
+            name="dataBinding"
+            type="com.android.cameraocr.util.AllergyAnalyzing"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

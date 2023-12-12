@@ -22,7 +22,6 @@ public class SettingFragment extends Fragment {
     private FragmentSettingBinding settingBinding;
     private UserViewModel userViewModel;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +36,7 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initButton();
+        setInitialAllergies();
     }
 
     private void initButton() {
@@ -51,5 +51,15 @@ public class SettingFragment extends Fragment {
             userViewModel.setAllergies(allergies);
         });
 
+    }
+
+    private void setInitialAllergies() {
+        List<String> initialAllergies = userViewModel.getAllergies();
+        if(initialAllergies != null){
+            for (int i = 0; i < settingBinding.allergyChipGroup.getChildCount(); i++) {
+                Chip chip = (Chip) settingBinding.allergyChipGroup.getChildAt(i);
+                chip.setChecked(initialAllergies.contains(chip.getText().toString()));
+            }
+        }
     }
 }

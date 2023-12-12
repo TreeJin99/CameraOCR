@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.cameraocr.R;
+import com.android.cameraocr.util.AllergyAnalyzing;
 import com.android.cameraocr.viewmodel.UserViewModel;
 import com.bumptech.glide.Glide;
 import com.google.mlkit.vision.common.InputImage;
@@ -28,6 +29,7 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -39,6 +41,9 @@ public class GalleryFragment extends Fragment {
     private UserViewModel userViewModel;
     private ImageView galleryImageView;
     private Button imagePickButton;
+    private Button ocrButton;
+    private Uri selectedImageUri;
+    private String fullOcrText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,21 +61,45 @@ public class GalleryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-
-        // 백그라운드 스레드에서 로그 출력
-        executor.submit(() -> {
-
-        });
-
         galleryImageView = view.findViewById(R.id.gallery_Imageview);
         imagePickButton = view.findViewById(R.id.imagePickButton);
+        ocrButton = view.findViewById(R.id.ocrButton);
 
+        initButton();
+    }
+
+    private void initButton() {
         imagePickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launcher.launch(new PickVisualMediaRequest.Builder()
                         .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                         .build());
+            }
+        });
+
+        ocrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (userViewModel.getAllergies() == null){
+                    Toast.makeText(requireContext(), "설정에서 알러지를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                } else{
+                    Log.d("사진 분석 버튼", userViewModel.getAllergies().toString());
+
+                    AllergyAnalyzing allergyAnalyzing = new AllergyAnalyzing(userViewModel);
+
+                    List<String> resultAllergiesFromPicture  =
+                            allergyAnalyzing.analyzingAllergiesFromPicture(fullOcrText);
+
+                    Log.d("사진 분석 버튼 결과", resultAllergiesFromPicture.toString());
+
+                }
+
+                if (selectedImageUri != null) {
+                    processSelectedImage(selectedImageUri);
+                } else {
+                    Toast.makeText(requireContext(), "이미지가 선택되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -81,7 +110,7 @@ public class GalleryFragment extends Fragment {
                     Toast.makeText(requireContext(), "No image Selected", Toast.LENGTH_SHORT).show();
                 } else {
                     Glide.with(requireContext()).load(result).into(galleryImageView);
-                    processSelectedImage(result);
+                    selectedImageUri = result;
                 }
             }
     );
@@ -92,8 +121,8 @@ public class GalleryFragment extends Fragment {
             image = InputImage.fromFilePath(requireContext(), selectedImageUri);
             recognizer.process(image)
                     .addOnSuccessListener(visionText -> {
-                        String fullText = visionText.getText();
-                        Log.d("OCR 결과: ", fullText);
+                        fullOcrText = visionText.getText().replaceAll("\\n", "");
+                        Log.d("OCR 결과: ", fullOcrText);
                     })
                     .addOnFailureListener(e -> {
                         e.printStackTrace();
@@ -102,4 +131,5 @@ public class GalleryFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
 }

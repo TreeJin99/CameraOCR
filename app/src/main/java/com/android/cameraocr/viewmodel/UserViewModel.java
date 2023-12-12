@@ -16,6 +16,9 @@ public class UserViewModel extends AndroidViewModel {
 
     // 사용자 입력 필드로
     private MutableLiveData<List<String>> allergies = new MutableLiveData<>();
+    public List<String> getAllergies(){
+        return allergies.getValue();
+    }
     public void setAllergies(List<String> newAllergies) {
         allergies.setValue(newAllergies);
     }
