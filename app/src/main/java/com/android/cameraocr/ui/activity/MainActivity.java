@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.android.cameraocr.R;
-import com.android.cameraocr.ui.fragment.CameraFragment;
-import com.android.cameraocr.ui.fragment.GalleryFragment;
-import com.android.cameraocr.ui.fragment.SettingFragment;
+import com.android.cameraocr.ui.fragment.main.CameraFragment;
+import com.android.cameraocr.ui.fragment.main.GalleryFragment;
+import com.android.cameraocr.ui.fragment.main.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.android.cameraocr.ui.fragment;
+package com.android.cameraocr.ui.fragment.main;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -31,9 +31,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.cameraocr.R;
 import com.android.cameraocr.databinding.FragmentCameraBinding;
-import com.android.cameraocr.databinding.FragmentSettingBinding;
 import com.android.cameraocr.viewmodel.UserViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
 
