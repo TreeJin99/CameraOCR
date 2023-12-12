@@ -1,0 +1,18 @@
+<!-- res/menu/bottom_navigation_menu.xml 파일 -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_camera"
+        android:icon="@drawable/ic_camera"
+        android:title="카메라" />
+
+    <item
+        android:id="@+id/menu_gallery"
+        android:icon="@drawable/ic_gallery"
+        android:title="앨범 선택" />
+
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="설정" />
+</menu>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.android.cameraocr.viewmodel.UserViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/signUpInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="갖고있는 알레르기가 있다면 선택해주세요."
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/signUpInfoHintTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="알레르기를 유발할 수 있는 성분을 가진 음식을 알려드릴게요!"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpInfoTextView" />
+
+        <TextView
+            android:id="@+id/signInFoAllergyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="알레르기"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpInfoHintTextView" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/allergy_chip_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:chipSpacingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signInFoAllergyText">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/peach_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="복숭아"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fork_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="돼지고기"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/egg_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="계란"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/milk_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="우유"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/crustacean_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="갑각류"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/bean_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:text="대두"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/peanut_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="땅콩"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/wheat_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="밀"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/shellfish_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="조개류"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fish_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:text="생선"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/nuts_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="견과류"
+                android:textColor="@color/chip_text_color"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_background" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/bt_register_allergy_done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:onClick="@{() -> viewModel.getAllergiesFromFragments()}"
+            android:padding="10dp"
+            android:text="완료"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
